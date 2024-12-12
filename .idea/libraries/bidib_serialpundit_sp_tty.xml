@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="bidib.serialpundit.sp.tty" type="repository">
+    <properties maven-id="org.bidib.com.serialpundit:sp-tty:1.0.4.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bidib/com/serialpundit/sp-tty/1.0.4.1/sp-tty-1.0.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/bidib/com/serialpundit/sp-core/1.0.4/sp-core-1.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
