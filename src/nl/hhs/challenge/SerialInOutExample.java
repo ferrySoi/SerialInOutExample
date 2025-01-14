@@ -61,7 +61,7 @@ public class SerialInOutExample extends JFrame {
             statement = connection.createStatement();
             ResultSet resultSet;
             resultSet = statement.executeQuery(
-                    "select * from tbl1");
+                    "select * from micro_bit_v2");
             Float code;
             String title;
             while (resultSet.next()) {
@@ -114,7 +114,7 @@ public class SerialInOutExample extends JFrame {
             // COM poort kun je ook hard invullen, zoek via Arduino of Device Manager uit welke COM poort je gebruikt:
             // long handle = scm.openComPort("COM3", true, true, true);
 
-            long handle = scm.openComPort("COM8", true, true, true);
+            long handle = scm.openComPort("COM6", true, true, true);
             scm.configureComPortData(handle, DATABITS.DB_8, STOPBITS.SB_1, PARITY.P_NONE, BAUDRATE.B9600, 9600);
             scm.configureComPortControl(handle, FLOWCONTROL.NONE, 'x', 'x', false, false);
             scm.writeString(handle, "test", 0);
@@ -153,7 +153,7 @@ public class SerialInOutExample extends JFrame {
                     this.inkomend.setText("Ontvangen op " + tijdstip + ": " + dataOntvangen);
 
                     // String naar float omzetten
-                    Float temperatuur = Float.parseFloat(dataOntvangen);
+                    Float afstand = Float.parseFloat(dataOntvangen);
 
                     // afronden op 1 cijfer achter de komma
 //                    temperatuur = (float) (Math.round(temperatuur * 10.0) / 10.0);
@@ -170,9 +170,28 @@ public class SerialInOutExample extends JFrame {
                     String user = "root";
                     String password = "0020Ferron0500";
                     try {
+
+                        double straal = 11;
+
+
+                        int tankLiter = 12;
+                        String Microbitnr = "M001";
+                        float waterVolumeP = (float) ((straal * straal) * Math.PI);
+                        float foutMarge = (float) 0.5;
+                        String gebruiker = "G001";
+
                         Connection conn = DriverManager.getConnection(url, user, password);
                         Statement mystmt = conn.createStatement();
-                        mystmt.executeUpdate("insert into tbl1" + "(temperatuur)" + "values(" + dataOntvangen + ")");
+                        System.out.println(dataOntvangen);
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Micro_Bit_V2_ID)" + "values('" + Microbitnr + "')");
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Afstand_tot_water)" + "values(" + dataOntvangen + ")");
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Liter_Tank)" + "values(" + tankLiter + ")");
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Watervolume_Percentage)" + "values(" + waterVolumeP + ")");
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Foutmarge)" + "values(" + foutMarge + ")");
+//                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(gebruiker)" + "values('" + gebruiker + "')");
+
+                        mystmt.executeUpdate("insert into vb1.micro_bit_v2" + "(Micro_Bit_V2_ID, Afstand_tot_water, Liter_Tank, Watervolume_Percentage, Foutmarge, gebruiker)" + "values('" + Microbitnr + "', " + dataOntvangen + ", " + tankLiter + ", " + waterVolumeP + ", " + foutMarge + ", '" + gebruiker + "')");
+
 
                     } catch (SQLException e) {
                         e.printStackTrace();
